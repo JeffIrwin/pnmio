@@ -105,13 +105,13 @@ end if
 
 if (frm >= 1 .and. frm <= 3) then
   if (frm == 1 .or. frm == 2) then
-    write(iunit, '(i0, a, i0)') ubound(b, 1) - lbound(b, 1) + 1, ' ', ubound(b, 2) - lbound(b, 1) + 1
+    write(iunit, '(i0, a, i0)')  ubound(b, 1) - lbound(b, 1) + 1,      ' ', ubound(b, 2) - lbound(b, 2) + 1
   else
     write(iunit, '(i0, a, i0)') (ubound(b, 1) - lbound(b, 1) + 1) / 3, ' ', ubound(b, 2) - lbound(b, 2) + 1
   end if
 else
   if (frm == 4 .or. frm == 5) then
-    write(dat, '(i0, a, i0)') ubound(b, 1) - lbound(b, 1) + 1, ' ', ubound(b, 2) - lbound(b, 1) + 1
+    write(dat, '(i0, a, i0)')  ubound(b, 1) - lbound(b, 1) + 1,      ' ', ubound(b, 2) - lbound(b, 2) + 1
   else
     write(dat, '(i0, a, i0)') (ubound(b, 1) - lbound(b, 1) + 1) / 3, ' ', ubound(b, 2) - lbound(b, 2) + 1
   end if

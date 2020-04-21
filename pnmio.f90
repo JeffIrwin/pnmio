@@ -61,24 +61,20 @@ else if (frm == 3) then
 else if (frm == 4) then
 
   ! B & W (0 and 1)
-  open(newunit = iunit, file = trim(fname)//'.pbm')
-  write(iunit, '(a)') 'P4'
+  open(newunit = iunit, file = trim(fname)//'.pbm', form = 'unformatted', access = 'stream')
+  write(iunit) 'P4', char(10)
 
 else if (frm == 5) then
 
   ! Grayscale (0 - 255)
-  open(newunit = iunit, file = trim(fname)//'.pgm')
-  write(iunit, '(a)') 'P5'
+  open(newunit = iunit, file = trim(fname)//'.pgm', form = 'unformatted', access = 'stream')
+  write(iunit) 'P5', char(10)
 
 else if (frm == 6) then
 
   ! RGB (0 - 255 triplets)
-  open(newunit = iunit, file = trim(fname)//'.ppm', form = 'unformatted', access = 'direct', recl = 1)
-  dat = 'P6'
-  !write(iunit) 'P6'
-  !write(iunit, rec = 1) trim(dat)
-  write(iunit, rec = 1) 'P'
-  write(iunit, rec = 2) '6'
+  open(newunit = iunit, file = trim(fname)//'.ppm', form = 'unformatted', access = 'stream')
+  write(iunit) 'P6', char(10)
 
 else
 
@@ -110,12 +106,16 @@ if (frm >= 1 .and. frm <= 3) then
     write(iunit, '(i0, a, i0)') (ubound(b, 1) - lbound(b, 1) + 1) / 3, ' ', ubound(b, 2) - lbound(b, 2) + 1
   end if
 else
-  if (frm == 4 .or. frm == 5) then
+  if (frm == 4) then
+    ! 8 bits packed into a byte
+    write(dat, '(i0, a, i0)') (ubound(b, 1) - lbound(b, 1) + 1)*8,   ' ', ubound(b, 2) - lbound(b, 2) + 1
+  else if (frm == 5) then
     write(dat, '(i0, a, i0)')  ubound(b, 1) - lbound(b, 1) + 1,      ' ', ubound(b, 2) - lbound(b, 2) + 1
   else
+    ! RGB triples
     write(dat, '(i0, a, i0)') (ubound(b, 1) - lbound(b, 1) + 1) / 3, ' ', ubound(b, 2) - lbound(b, 2) + 1
   end if
-  write(iunit) trim(dat)
+  write(iunit) trim(dat), char(10)
 end if
 
 if (frm >= 1 .and. frm <= 3) then

@@ -17,8 +17,11 @@ integer function writepnm(frm, b, fname, header)
 !     5:  Grayscale  Binary
 !     6:  RGB        Binary
 !
-! b
-!     Rank-two array of pixel values
+! b(:,:)
+!     Rank-two byte array of pixel values.  The RGB versions have the RGB
+!     triplets stretched out along the first array dimension.  The binary B&W
+!     version has 8 bits of B&W pixels packed into a single byte of the array
+!     along the first dimension.
 !
 ! fname
 !     File name without extension

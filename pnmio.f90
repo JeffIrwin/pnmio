@@ -144,10 +144,10 @@ if (frm >= PNM_BW_ASCII .and. frm <= PNM_RGB_ASCII) then
 
   write(dat, '(a,i0,a)') '(', ubound(b,1) - lbound(b,1) + 1, '(i0,x))'
   frmstr = trim(dat)
-  write(iunit, frmstr) [((ichar(b(ix, iy)), ix = lbound(b,1), ubound(b,1)), iy = ubound(b,2), lbound(b,2), -1)]
+  write(iunit, frmstr) ichar(b(:, ubound(b,2): lbound(b,2): -1))
 
 else
-  write(iunit) [((b(ix, iy), ix = lbound(b,1), ubound(b,1)), iy = ubound(b,2), lbound(b,2), -1)]
+  write(iunit) b(:, ubound(b,2): lbound(b,2): -1)
 end if
 
 close(iunit)

@@ -102,7 +102,7 @@ if (headerl) then
   if (frm >= PNM_BW_ASCII .and. frm <= PNM_RGB_ASCII) then
     write(iunit, '(a)') str
   else
-    write(iunit) str
+    write(iunit) str, char(10)
   end if
 end if
 

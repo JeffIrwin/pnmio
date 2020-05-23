@@ -2,7 +2,7 @@
 
 inputs=tests/*.txt
 
-frames=( 2 5 )
+frames=( 1 2 4 5 )
 
 exebase=pnmio
 outdir=./tests/

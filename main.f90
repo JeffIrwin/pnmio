@@ -4,6 +4,7 @@ program main
 	use pnmio
 	implicit none
 
+	character :: bx
 	character(len = *), parameter :: me = "pnmio", tab = char(9)
 	character(len = :), allocatable :: fi, fo, fbase
 	character, allocatable :: b(:,:), bb(:,:)
@@ -73,6 +74,35 @@ program main
 
 	frm = PNM_GRAY_BINARY
 	fo = fbase//'_5'
+	io = writepnm(frm, b, fo)
+	deallocate(b)
+
+	! Black to color gradients left to right
+	allocate(b(nx * 3, ny))
+	b = achar(0)
+	do i = 1, nx
+		bx = achar(nint(255.d0 * (i-1) / (nx-1)))
+
+		! R
+		b(3*i - 2   ,      1: 2*ny/6) = bx
+
+		! G
+		b(3*i - 1   ,   ny/6: 4*ny/6) = bx
+
+		! B
+		b(3*i       , 3*ny/6: 5*ny/6) = bx
+
+		! Every channel
+		b(3*i-2: 3*i, 5*ny/6:   ny  ) = bx
+
+	end do
+
+	frm = PNM_RGB_ASCII
+	fo = fbase//'_3'
+	io = writepnm(frm, b, fo)
+
+	frm = PNM_RGB_BINARY
+	fo = fbase//'_6'
 	io = writepnm(frm, b, fo)
 	deallocate(b)
 

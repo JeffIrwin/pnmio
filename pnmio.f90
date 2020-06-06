@@ -33,7 +33,7 @@ integer function writepnm(frm, b, fname, header)
 character :: fname*(*), dat*256
 character(len = :), allocatable :: str, frmstr
 
-integer :: frm, ix, iy, iunit
+integer :: frm, iunit
 character, allocatable :: b(:,:)
 
 logical, optional, intent(in) :: header
@@ -137,10 +137,6 @@ else
 end if
 
 if (frm >= PNM_BW_ASCII .and. frm <= PNM_RGB_ASCII) then
-
-  !! This works, and libre office and ffmpeg can read the results.  But each
-  !! number is on its own line.
-  !write(iunit, '(i0,x)') [((ichar(b(ix, iy)), ix = lbound(b,1), ubound(b,1)), iy = ubound(b,2), lbound(b,2), -1)]
 
   write(dat, '(a,i0,a)') '(', ubound(b,1) - lbound(b,1) + 1, '(i0,x))'
   frmstr = trim(dat)

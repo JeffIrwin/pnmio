@@ -29,7 +29,8 @@ Fortran:
     character, allocatable :: b(:,:)
     integer :: i, io, nx, ny, frm
     
-    ! Grayscale formats are the simplest.  Black and white and RGB color formats are slightly different.  See main.f90 for full details.
+    ! Grayscale formats are the simplest.  Black and white and RGB color
+    ! formats are slightly different.  See main.f90 for full details.
     
     ! Allocate bytes for pixel values
     nx = 1080
